@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "electron": "^19.0.4",
+    "jest": "^28.1.1"
+  },
+  "dependencies": {
+    "sqlite3": "^5.0.8"
+  },
+  "name": "eval-electronjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
