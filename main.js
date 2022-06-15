@@ -1,5 +1,11 @@
 const { app, BrowserWindow, Menu, ipcMain, dialog, Notification, getCurrentWindow } = require('electron')
 const path = require('path')
+const database = require('./model/Database')
+const Task = require('./model/Task')
+const List = require('./model/List')
+const db = new database('task.db')
+const task = new Task(db)
+const lists = new List(db)
 
 const menu = [
     {
@@ -73,16 +79,83 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on('task:read', (e, data) => {
-    task.getTask(data).then(
+    Task.getTask(data).then(
         data => {
             w.webContents.send('async:task:read', data)
         }
     )
 })
 ipcMain.on('list:read', (e, data) => {
-    lists.getList().then(
+    lists.getLists().then(
         data => {
             w.webContents.send('async:list:read', data)
         }
     )
 })
+ipcMain.on('task:add', (e , data) => {
+    // dialog.showMessageBox({
+    //   type: 'info',
+    //   title: 'Item ajouté',
+    //   message: 'Bravo vous avez ajouté un item'
+    // })
+    const notif = new Notification({
+        title: 'Item ajouté',
+        body: 'Bravo vous avez ajouté un item',
+        icon: 'assets/check_one_icon.png'
+    })
+    Task.addTask(data)
+        .then(
+            () => {
+                w.webContents.send('item:add', data)
+                w.reload()
+            },
+            error => console.log(error)
+        )
+
+    // BrowserWindow.fromWebContents(e.sender).close();
+    notif.show()
+})
+
+ipcMain.on('item:delete', (e, data) => {
+    Task.deteleTask(data.id).then(
+        () => {
+            w.reload()
+        },
+        error => console.log(error)
+    )
+})
+
+ipcMain.on('task:update', (e, data) => {
+    win.show()
+    win.webContents.send('async:update', data)
+})
+
+ipcMain.on('task:update:persist', (e, data) => {
+    Task.updateTask(data).then(
+        () => {
+            w.reload()
+            win.hide()
+        },
+        error => console.log(error)
+    )
+})
+
+if (process.env.NODE_ENV !== 'production') {
+    menu.push({
+        label: 'Developer Tools',
+        submenu: [
+            {
+                label: 'Toggle DevTools',
+                accelerator: process.platform ==='darwin' ? 'Command+I' : 'Ctrl+I',
+
+                click(item, focusedWindow) {
+                    focusedWindow.webContents.toggleDevTools()
+                }
+            },
+            {
+                role: 'reload',
+                accelerator:'F5'
+            }
+        ]
+    })
+}
