@@ -1,10 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+
 body{
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: auto;
     background: url("../style/nature3.jpg");
     height: 100vh;
     overflow: hidden;
@@ -14,31 +11,31 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    background: white;
+    width: 600px;
+    background: rgb(126, 193, 186);
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
 .center h1{
     text-align: center;
     padding: 20px 0;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid rgb(0, 0, 0);
 }
 .center form{
-    padding: 0 40px;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 form .txt_field{
     position: relative;
-    border-bottom: 2px solid #adadad;
-    margin: 30px 0;
+    margin: 5px 0;
 }
 .txt_field input{
     width: 100%;
     padding: 0 5px;
     height: 40px;
     font-size: 16px;
-    border: none;
+    border-color: #000000;
+    border-radius: 10px;
     background: none;
     outline: none;
 }
@@ -46,9 +43,12 @@ form .txt_field{
     position: absolute;
     top: 50%;
     left: 5px;
-    color: #adadad;
+    color: #000000;
     transform: translateY(-50%);
     font-size: 16px;
     pointer-events: none;
     transition: .5s;
+}
+.btn {
+    padding-bottom: 20px ;
 }
