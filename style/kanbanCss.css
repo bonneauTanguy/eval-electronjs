@@ -17,7 +17,7 @@
     font-size: 1rem;
   }
   body {
-    background: no-repeat url("./nature3.jpg");
+    background: no-repeat url("../style/nature3.jpg");
   }
   .kanban-board {
     display: flex;
