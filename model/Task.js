@@ -4,7 +4,7 @@ class Task {
         this.db = db.connect()
     }
 
-    getItems(id) {
+    getTask(id) {
         return new Promise((resolve, reject) => {
             this.db.all("SELECT * FROM Task WHERE id_List="+ id, (err,rows) =>{
                 if(err) {
@@ -17,9 +17,9 @@ class Task {
         });
     }
 
-    addItems(data) {
+    addTask(data) {
         return new Promise((resolve, reject) => {
-            const stmt = this.db.prepare("INSERT INTO Task (title) VALUES (?)")
+            const stmt = this.db.prepare("INSERT INTO Ta**sk (title, rank) VALUES (?)")
             stmt.run(data, (err,rows) => {
                 if(err) {
                     reject(err)
@@ -30,7 +30,7 @@ class Task {
         })
     }
 
-    deleteItem(data) {
+    deleteTask(data) {
         return new Promise((resolve, reject) => {
             const stmt = this.db.prepare("DELETE FROM Task WHERE id = ?")
             stmt.get(data, (err,rows) => {
@@ -43,9 +43,9 @@ class Task {
         })
     }
 
-    updateItem(data) {
+    updateTask(data) {
         return new Promise((resolve, reject) => {
-            const stmt = this.db.prepare("UPDATE Task SET title=? WHERE id="+ data.id)
+            const stmt = this.db.prepare("UPDATE Task SET title=?, rank=? WHERE id="+ data.id)
             stmt.run(data.title, (err,rows) => {
                 if(err) {
                     reject(err)

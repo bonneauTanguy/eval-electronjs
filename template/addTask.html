@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+<form>
+    <label for="title">Title</label>
+    <input type="text" id="title">
+    <label for="list">Choisir une liste</label>
+    <select id="list" name="list">
+        <option value="TODO">TODO</option>
+        <option value="IN PROGRESS">IN PROGRESS</option>
+        <option value="REVIEW">REVIEW</option>
+        <option value="DONE">DONE</option>
+    </select>
+    <label for="rank">Rank</label>
+    <input type="text" id="rank">
+
+    <button type="submit">Create</button>
+</form>
+<script src="../script/renderer-addTask.js"></script>
+</body>
+</html>
